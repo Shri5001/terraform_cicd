@@ -1,0 +1,20 @@
+
+pipeline {
+    agent any
+
+    stages {
+        stage('git clone') {
+            steps {
+                git branch: 'main', url: 'https://github.com/Shri5001/terraform_cicd.git'
+            }
+        }
+        stage('git init'){
+            steps {
+                sh ''' terraform init
+                  terraform plan
+                  terraform apply --auto-approve
+                  '''
+            }
+        }
+    }
+}
